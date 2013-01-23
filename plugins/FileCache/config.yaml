@@ -1,0 +1,24 @@
+id  : FileCache
+key : filecache
+name: FileCache
+version: 0.1
+author_name: Alfasado Inc.
+author_link: http://alfasado.net/
+description: '<__trans phrase="Caches the MT internal data to the local file using Cache::FileCache.">'
+l10n_class: FileCache::L10N
+config_settings:
+    FileCacheNameSpace:
+        default: movabletype
+    FileCacheDefaultExpires:
+        default: 3600
+    FileCacheCacheDir:
+        default: /tmp
+callbacks:
+    init_app: >
+        sub {
+            use MT::Memcached;
+            use FileCache;
+            my $cache = MT::Memcached->instance;
+            $cache->{ memcached } = FileCache->new()
+            unless $cache->{ memcached };
+        }
