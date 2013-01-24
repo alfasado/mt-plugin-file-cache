@@ -26,7 +26,7 @@ sub get {
     my ( $this, $key ) = @_;
     if (! $key ) { return undef };
     if ( my $value = MT->request( 'filecache:' . $key ) ) {
-        $value;
+        return $value;
     }
     my $f = $this->filecache();
     my $value = $f->get( $key );
