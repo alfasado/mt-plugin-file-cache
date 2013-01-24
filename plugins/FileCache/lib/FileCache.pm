@@ -76,6 +76,7 @@ sub decr {
 sub delete {
     my ( $this, $key ) = @_;
     if (! $key ) { return undef };
+    my $f = $this->filecache();
     $f->remove( $key );
 }
 
