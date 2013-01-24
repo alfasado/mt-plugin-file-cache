@@ -24,6 +24,7 @@ sub filecache {
 
 sub get {
     my ( $this, $key ) = @_;
+    if (! $key ) { return undef };
     if ( my $value = MT->request( 'filecache:' . $key ) ) {
         $value;
     }
@@ -35,6 +36,7 @@ sub get {
 
 sub set {
     my ( $this, $key, $value, $tts ) = @_;
+    if (! $key ) { return undef };
     my $f = $this->filecache( $tts );
     my $res = $f->set( $key, $value, $tts );
     if (! $tts ) {
@@ -45,6 +47,7 @@ sub set {
 
 sub add {
     my ( $this, $key, $value, $tts ) = @_;
+    if (! $key ) { return undef };
     my $f = $this->filecache( $tts );
     return $f->set( $key, $value, $tts )
     unless defined $f->get( $key );
@@ -52,6 +55,7 @@ sub add {
 
 sub incr {
     my ( $this, $key, $incr ) = @_;
+    if (! $key ) { return undef };
     my $f = $this->filecache();
     if (! $incr ) { $incr = 1 };
     my $value = $f->get( $key ) || 0;
@@ -61,6 +65,7 @@ sub incr {
 
 sub decr {
     my ( $this, $key, $decr ) = @_;
+    if (! $key ) { return undef };
     my $f = $this->filecache();
     if (! $decr ) { $decr = 1 };
     my $value = $f->get( $key ) || 0;
@@ -70,6 +75,7 @@ sub decr {
 
 sub delete {
     my ( $this, $key ) = @_;
+    if (! $key ) { return undef };
     $f->remove( $key );
 }
 
