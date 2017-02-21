@@ -13,6 +13,8 @@ config_settings:
         default: 3600
     FileCacheCacheDir:
         default: /tmp
+    RebuildUpdateEntryOnly:
+        default: 0
 callbacks:
     init_app: >
         sub {
@@ -22,3 +24,4 @@ callbacks:
             $cache->{ memcached } = FileCache->new()
             unless $cache->{ memcached };
         }
+    build_file_filter: $filecache::FileCache::Callbacks::build_file_filter
