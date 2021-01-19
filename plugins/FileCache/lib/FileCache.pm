@@ -13,8 +13,8 @@ sub filecache {
     my ( $this, $tts ) = @_;
     if ( $tts || ! $f ) {
         my $namespace = MT->config( 'FileCacheNameSpace' ) || 'movabletype';
-        my $default_expires_in = $tts || MT->config( 'FileCacheDefaultExpires' ) || 600;
-        my $root = MT->config( 'FileCacheCacheDir' ) || '/tmp';
+        my $default_expires_in = $tts || MT->config( 'FileCacheDefaultExpires' ) || 3600;
+        my $root = MT->config( 'FileCacheCacheDir' ) || MT->config( 'TempDir' ) || '/tmp';
         $f = new Cache::FileCache( { namespace => $namespace,
                                      default_expires_in => $default_expires_in,
                                      cache_root => $root } );
